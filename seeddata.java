@@ -12,8 +12,7 @@ import java.util.Locale;
 
 @Transactional
 @Component
-public class SeedData implements CommandLineRunner
-{
+public class SeedData implements CommandLineRunner {
     @Autowired
     RoleService roleService;
 
@@ -22,8 +21,7 @@ public class SeedData implements CommandLineRunner
 
 
     @Override
-    public void run(String[] args) throws Exception
-    {
+    public void run(String[] args) throws Exception {
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
         Role r3 = new Role("data");
@@ -35,21 +33,21 @@ public class SeedData implements CommandLineRunner
         // admin, data, user
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(),
-                                 r1));
+                r1));
         admins.add(new UserRoles(new User(),
-                                 r2));
+                r2));
         admins.add(new UserRoles(new User(),
-                                 r3));
+                r3));
         User u1 = new User("admin",
-                           "password",
-                           "admin@lambdaschool.local",
-                           admins);
+                "password",
+                "admin@lambdaschool.local",
+                admins);
         u1.getUseremails()
-          .add(new Useremail(u1,
-                             "admin@email.local"));
+                .add(new Useremail(u1,
+                        "admin@email.local"));
         u1.getUseremails()
-          .add(new Useremail(u1,
-                             "admin@mymail.local"));
+                .add(new Useremail(u1,
+                        "admin@mymail.local"));
         u1.getTodos().add(new Todo("Finish java-orders-swagger", new Date(), u1));
         u1.getTodos().add(new Todo("Feed the turtles", new Date(), u1));
         u1.getTodos().add(new Todo("Complete the sprint challenge", new Date(), u1));
@@ -59,22 +57,22 @@ public class SeedData implements CommandLineRunner
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
         datas.add(new UserRoles(new User(),
-                                r3));
+                r3));
         datas.add(new UserRoles(new User(),
-                                r2));
+                r2));
         User u2 = new User("cinnamon",
-                           "1234567",
-                           "cinnamon@lambdaschool.local",
-                           datas);
+                "1234567",
+                "cinnamon@lambdaschool.local",
+                datas);
         u2.getUseremails()
-          .add(new Useremail(u2,
-                             "cinnamon@mymail.local"));
+                .add(new Useremail(u2,
+                        "cinnamon@mymail.local"));
         u2.getUseremails()
-          .add(new Useremail(u2,
-                             "hops@mymail.local"));
+                .add(new Useremail(u2,
+                        "hops@mymail.local"));
         u2.getUseremails()
-          .add(new Useremail(u2,
-                             "bunny@email.local"));
+                .add(new Useremail(u2,
+                        "bunny@email.local"));
         u2.getTodos().add(new Todo("Walk the dogs", new Date(), u2));
         u2.getTodos().add(new Todo("provide feedback to my instructor", new Date(), u2));
         userService.save(u2);
@@ -82,32 +80,32 @@ public class SeedData implements CommandLineRunner
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(),
-                                r2));
+                r2));
         User u3 = new User("barnbarn",
-                           "ILuvM4th!",
-                           "barnbarn@lambdaschool.local",
-                           users);
+                "ILuvM4th!",
+                "barnbarn@lambdaschool.local",
+                users);
         u3.getUseremails()
-          .add(new Useremail(u3,
-                             "barnbarn@email.local"));
+                .add(new Useremail(u3,
+                        "barnbarn@email.local"));
         userService.save(u3);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(),
-                                r2));
+                r2));
         User u4 = new User("puttat",
-                           "password",
-                           "puttat@school.lambda",
-                           users);
+                "password",
+                "puttat@school.lambda",
+                users);
         userService.save(u4);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(),
-                                r2));
+                r2));
         User u5 = new User("misskitty",
-                           "password",
-                           "misskitty@school.lambda",
-                           users);
+                "password",
+                "misskitty@school.lambda",
+                users);
         userService.save(u5);
     }
 }
