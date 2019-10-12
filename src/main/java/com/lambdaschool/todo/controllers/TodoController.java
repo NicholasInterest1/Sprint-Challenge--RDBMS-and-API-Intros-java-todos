@@ -17,7 +17,6 @@ public class TodoController {
     private TodoService todoService;
 
     // PUT -- http://localhost:5890/todos/todoid/{todoid}
-    // updates a to-do based on given todoid
 
     @PutMapping(value = "/todoid/{todoid}",
             consumes = {"application/json"})
@@ -28,7 +27,6 @@ public class TodoController {
     }
 
     // GET -- http://localhost:5890/todos/todos
-    // get all todos
 
     @GetMapping(value = "/todos",
             produces = {"application/json"})
