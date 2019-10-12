@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Entity
 @Table(name = "roles")
 public class Role extends Auditable {
@@ -16,18 +18,18 @@ public class Role extends Auditable {
 
     @Column(nullable = false,
             unique = true)
-    String rolename;
+    private String name;
 
     @OneToMany(mappedBy = "role",
             cascade = CascadeType.ALL)
     @JsonIgnoreProperties("role")
-    private List<UserRoles> userRoles = new ArrayList<>();
+    private List<UserRoles> userroles = new ArrayList<>();
 
     public Role() {
     }
 
-    public Role(String rolename) {
-        this.rolename = rolename;
+    public Role(String name) {
+        this.name = name.toUpperCase();
     }
 
     public long getRoleid() {
@@ -38,19 +40,25 @@ public class Role extends Auditable {
         this.roleid = roleid;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getName() {
+
+        if (name == null) {
+            return null;
+        } else {
+            return name.toUpperCase();
+        }
     }
 
     public void setName(String name) {
-        this.rolename = name;
+        this.name = name.toUpperCase();
     }
 
-    public List<UserRoles> getUserRoles() {
-        return userRoles;
+    public List<UserRoles> getUserroles() {
+
+        return userroles;
     }
 
-    public void setUserRoles(List<UserRoles> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserroles(List<UserRoles> userroles) {
+        this.userroles = userroles;
     }
 }

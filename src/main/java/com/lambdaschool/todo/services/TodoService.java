@@ -2,6 +2,9 @@ package com.lambdaschool.todo.services;
 
 import com.lambdaschool.todo.models.Todo;
 
+import java.util.List;
+
 public interface TodoService {
-    Todo update(Todo todo, long id);
+    Todo updateTodo(Todo todo, long todoid);
+    List<Todo> findAllTodos();
 }

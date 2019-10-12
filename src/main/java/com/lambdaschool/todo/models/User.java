@@ -27,41 +27,35 @@ public class User extends Auditable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(nullable = false,
-            unique = true)
+    @Column(nullable = false, unique = true)
     @Email
     private String primaryemail;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
-    private List<UserRoles> userRoles = new ArrayList<>();
+    private List<UserRoles> userroles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("user")
     private List<Useremail> useremails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Todo> todos = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String username,
-                String password,
-                String primaryemail,
-                List<UserRoles> userRoles) {
+    public User(String username, String password, String primaryemail, List<UserRoles> userRoles) {
         setUsername(username);
+
         setPassword(password);
+
         this.primaryemail = primaryemail;
         for (UserRoles ur : userRoles) {
             ur.setUser(this);
         }
-        this.userRoles = userRoles;
+        this.userroles = userRoles;
     }
 
     public long getUserid() {
@@ -70,14 +64,6 @@ public class User extends Auditable {
 
     public void setUserid(long userid) {
         this.userid = userid;
-    }
-
-    public List<Todo> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
     }
 
     public String getUsername() {
@@ -93,15 +79,11 @@ public class User extends Auditable {
     }
 
     public String getPrimaryemail() {
-        if (primaryemail == null) {
-            return null;
-        } else {
-            return primaryemail.toLowerCase();
-        }
+        return primaryemail;
     }
 
     public void setPrimaryemail(String primaryemail) {
-        this.primaryemail = primaryemail.toLowerCase();
+        this.primaryemail = primaryemail;
     }
 
     public String getPassword() {
@@ -117,12 +99,12 @@ public class User extends Auditable {
         this.password = password;
     }
 
-    public List<UserRoles> getUserRoles() {
-        return userRoles;
+    public List<UserRoles> getUserroles() {
+        return userroles;
     }
 
-    public void setUserRoles(List<UserRoles> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserroles(List<UserRoles> userroles) {
+        this.userroles = userroles;
     }
 
     public List<Useremail> getUseremails() {
@@ -135,18 +117,28 @@ public class User extends Auditable {
 
     @JsonIgnore
     public List<SimpleGrantedAuthority> getAuthority() {
+
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
-        for (UserRoles r : this.userRoles) {
+
+        for (UserRoles r : this.userroles) {
             String myRole = "ROLE_" + r.getRole()
-                    .getRolename()
-                    .toUpperCase();
+                    .getName().toUpperCase();
             rtnList.add(new SimpleGrantedAuthority(myRole));
         }
+
         return rtnList;
+    }
+
+    public List<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
     }
 
     @Override
     public String toString() {
-        return "User{" + "userid=" + userid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", primaryEmail='" + primaryemail + '\'' + ", userroles=" + userRoles + ", useremails=" + useremails + '}';
+        return "User{" + "userid=" + userid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", primaryEmail='" + primaryemail + '\'' + ", userroles=" + userroles + ", useremails=" + useremails + ", todos=" + todos + '}';
     }
 }

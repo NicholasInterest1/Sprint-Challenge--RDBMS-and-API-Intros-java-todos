@@ -27,22 +27,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
+
         return super.authenticationManagerBean();
     }
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
     }
 
     @Bean
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore(); //store our tokens in memory.
+
+        return new InMemoryTokenStore();
     }
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(); //use BCrypt to encrypt our passwords
+
+        return new BCryptPasswordEncoder();
     }
 }

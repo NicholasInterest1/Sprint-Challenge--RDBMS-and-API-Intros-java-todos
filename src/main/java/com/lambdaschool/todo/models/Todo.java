@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Date;
 
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 @Entity
-@Table(name = "todo")
+@Table(name = "todos")
 public class Todo extends Auditable {
 
     @Id
@@ -16,12 +18,13 @@ public class Todo extends Auditable {
     @Column(nullable = false)
     private String description;
 
+    @Temporal(TIMESTAMP)
     private Date datestarted;
-
     private boolean completed;
 
     @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userid",
+            nullable = false)
     @JsonIgnoreProperties("todos")
     private User user;
 
@@ -31,6 +34,7 @@ public class Todo extends Auditable {
     public Todo(String description, Date datestarted, User user) {
         this.description = description;
         this.datestarted = datestarted;
+        completed = false;
         this.user = user;
     }
 

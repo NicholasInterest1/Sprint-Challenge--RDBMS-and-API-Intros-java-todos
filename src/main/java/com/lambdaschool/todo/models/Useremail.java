@@ -39,15 +39,11 @@ public class Useremail extends Auditable {
     }
 
     public String getUseremail() {
-        if (useremail == null) {
-            return null;
-        } else {
-            return useremail.toLowerCase();
-        }
+        return useremail;
     }
 
     public void setUseremail(String useremail) {
-        this.useremail = useremail.toLowerCase();
+        this.useremail = useremail;
     }
 
     public User getUser() {

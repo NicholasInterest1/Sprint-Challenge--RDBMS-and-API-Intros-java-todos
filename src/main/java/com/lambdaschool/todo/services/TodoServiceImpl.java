@@ -1,42 +1,46 @@
 package com.lambdaschool.todo.services;
 
 import com.lambdaschool.todo.models.Todo;
-import com.lambdaschool.todo.repos.ToDoRepository;
+import com.lambdaschool.todo.repos.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
+@Transactional
 @Service(value = "todoService")
 public class TodoServiceImpl implements TodoService {
 
     @Autowired
-    private ToDoRepository todorepos;
+    private TodoRepository todorepos;
 
+    @Transactional
     @Override
-    public Todo update(Todo todo, long id) {
+    public Todo updateTodo(Todo todo, long todoid) {
 
-        Todo currentTodo = todorepos.findById(id)
-                .orElseThrow(()->new EntityNotFoundException(Long.toString(id)));
-        System.out.println("todo found");
+        Todo currentTodo = todorepos.findById(todoid).orElseThrow(() -> new EntityNotFoundException(Long.toString(todoid)));
 
-        if(todo.getDescription() != null) {
-            currentTodo.setDescription(todo.getDescription());
-        }
-
-        if(todo.getDatestarted() != null) {
+        if (todo.getDatestarted() != null) {
             currentTodo.setDatestarted(todo.getDatestarted());
         }
 
-        if(todo.isCompleted() != false) {
-            currentTodo.setCompleted(true);
-        } else {
-            currentTodo.setCompleted(false);
+        if (todo.getDescription() != null) {
+            currentTodo.setDescription(todo.getDescription());
         }
 
-        if(todo.getUser() != null) {
-            currentTodo.setUser(todo.getUser());
-        }
+        currentTodo.setCompleted(todo.isCompleted());
+
         return todorepos.save(currentTodo);
+    }
+
+    @Override
+    public List<Todo> findAllTodos() {
+        List<Todo> rtnList = new ArrayList<>();
+        todorepos.findAll().iterator().forEachRemaining(rtnList::add);
+
+        return rtnList;
     }
 }
