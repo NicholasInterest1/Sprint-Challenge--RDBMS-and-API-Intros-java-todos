@@ -26,12 +26,7 @@ public class H2ServerConfig {
     @Bean
     @ConditionalOnExpression("${h2.tcp.enabled:true}")
     public Server h2TcpServer() throws SQLException {
-
-        return Server.createTcpServer("-tcp",
-                "-tcpAllowOthers",
-                "-tcpPort",
-                h2TcpPort)
-                .start();
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", h2TcpPort).start();
     }
 
     /**

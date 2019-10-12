@@ -61,14 +61,9 @@ public class UserController {
         newuser = userService.save(newuser);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{userid}")
-                .buildAndExpand(newuser.getUserid())
-                .toUri();
+        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userid}").buildAndExpand(newuser.getUserid()).toUri();
         responseHeaders.setLocation(newUserURI);
-        return new ResponseEntity<>(null,
-                responseHeaders,
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
     // POST -- http://localhost:2019/users/todo/{userid}
