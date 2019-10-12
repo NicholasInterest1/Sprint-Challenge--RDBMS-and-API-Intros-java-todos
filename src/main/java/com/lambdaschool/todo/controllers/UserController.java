@@ -77,7 +77,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // DELETE - http://localhost:5890/users/user/{id}
+    // DELETE - http://localhost:5890/users/userid/{id}
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/userid/{userid}")
