@@ -21,7 +21,7 @@ public class UseremailController {
     @Autowired
     UseremailService useremailService;
 
-    // http://localhost:2019/useremails/useremails
+    // http://localhost:5890/useremails/useremails
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/useremails", produces = {"application/json"})
@@ -31,7 +31,7 @@ public class UseremailController {
         return new ResponseEntity<>(allUserEmails, HttpStatus.OK);
     }
 
-    // http://localhost:2019/useremails/useremail/8
+    // http://localhost:5890/useremails/useremail/8
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/useremail/{useremailId}", produces = {"application/json"})
@@ -41,7 +41,7 @@ public class UseremailController {
         return new ResponseEntity<>(ue, HttpStatus.OK);
     }
 
-    // http://localhost:2019/useremails/username/cinnamon
+    // http://localhost:5890/useremails/username/cinnamon
 
     @GetMapping(value = "/username/{userName}", produces = {"application/json"})
     public ResponseEntity<?> findUseremailByUserName(HttpServletRequest request, @PathVariable String userName) {
@@ -50,7 +50,7 @@ public class UseremailController {
         return new ResponseEntity<>(theUseremails, HttpStatus.OK);
     }
 
-    // http://localhost:2019/useremails/useremail/8
+    // http://localhost:5890/useremails/useremail/8
 
     @DeleteMapping("/useremail/{useremailid}")
     public ResponseEntity<?> deleteUserEmailById(HttpServletRequest request, @PathVariable long useremailid) {
@@ -59,7 +59,7 @@ public class UseremailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // http://localhost:2019/useremails/useremail/9/email/favbun@hops.local
+    // http://localhost:5890/useremails/useremail/9/email/favbun@hops.local
 
     @PutMapping("/useremail/{useremailid}/email/{emailaddress}")
     public ResponseEntity<?> updateUserEmail(HttpServletRequest request, @PathVariable long useremailid, @PathVariable String emailaddress) {

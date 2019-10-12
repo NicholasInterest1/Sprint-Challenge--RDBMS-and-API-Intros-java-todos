@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // GET -- http://localhost:2019/users/mine
+    // GET -- http://localhost:5890/users/mine
 
     @GetMapping(value = "/mine",
             produces = {"application/json"})
@@ -37,7 +37,7 @@ public class UserController {
                 HttpStatus.OK);
     }
 
-    // http://localhost:2019/users/users/
+    // http://localhost:5890/users/users/
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/users",
@@ -49,7 +49,7 @@ public class UserController {
                 HttpStatus.OK);
     }
 
-    // POST -- http://localhost:2019/users/user
+    // POST -- http://localhost:5890/users/user
     // adds a user
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -66,7 +66,7 @@ public class UserController {
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    // POST -- http://localhost:2019/users/todo/{userid}
+    // POST -- http://localhost:5890/users/todo/{userid}
     // adds a to-do to the assigned user
 
     @PostMapping(value = "/todo/{userid}",
@@ -77,7 +77,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // DELETE - http://localhost:2019/users/user/{id}
+    // DELETE - http://localhost:5890/users/user/{id}
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/userid/{userid}")

@@ -21,7 +21,7 @@ public class RolesController {
     @Autowired
     RoleService roleService;
 
-    // http://localhost:2019/roles/roles
+    // http://localhost:5890/roles/roles
 
     @GetMapping(value = "/roles", produces = {"application/json"})
     public ResponseEntity<?> listRoles() {
@@ -31,7 +31,7 @@ public class RolesController {
         return new ResponseEntity<>(allRoles, HttpStatus.OK);
     }
 
-    // http://localhost:2019/roles/role/3
+    // http://localhost:5890/roles/role/3
 
     @GetMapping(value = "/role/{roleId}", produces = {"application/json"})
     public ResponseEntity<?> getRoleById(@PathVariable Long roleId) {
@@ -41,7 +41,7 @@ public class RolesController {
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
-    // http://localhost:2019/roles/role/name/data
+    // http://localhost:5890/roles/role/name/data
 
     @GetMapping(value = "/role/name/{roleName}", produces = {"application/json"})
     public ResponseEntity<?> getRoleByName(@PathVariable String roleName) {
@@ -51,7 +51,7 @@ public class RolesController {
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
-    // http://localhost:2019/roles/role
+    // http://localhost:5890/roles/role
 
     @PostMapping(value = "/role")
     public ResponseEntity<?> addNewRole(@Valid @RequestBody Role newRole) throws URISyntaxException {
@@ -67,7 +67,7 @@ public class RolesController {
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    // http://localhost:2019/roles/role/3
+    // http://localhost:5890/roles/role/3
 
     @PutMapping(value = "/role/{roleid}")
     public ResponseEntity<?> addNewRole(@PathVariable long roleid, @Valid @RequestBody Role newRole) throws URISyntaxException {
@@ -75,7 +75,7 @@ public class RolesController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // localhost:2019/roles/role/3
+    // localhost:5890/roles/role/3
 
     @DeleteMapping("/role/{id}")
     public ResponseEntity<?> deleteRoleById(@PathVariable long id) {

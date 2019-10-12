@@ -16,7 +16,7 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    // PUT -- http://localhost:2019/todos/todoid/{todoid}
+    // PUT -- http://localhost:5890/todos/todoid/{todoid}
     // updates a to-do based on given todoid
 
     @PutMapping(value = "/todoid/{todoid}",
@@ -27,7 +27,7 @@ public class TodoController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // GET -- http://localhost:2019/todos/todos
+    // GET -- http://localhost:5890/todos/todos
     // get all todos
 
     @GetMapping(value = "/todos",
